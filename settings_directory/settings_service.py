@@ -11,10 +11,6 @@ def settings_save(values, program_list):
     settings.set_settings(settings_to_save)
 
 
-# def settings_close():
-#     pass
-
-
 def program_add(window, values, program_list):
     for el in values["current_programs"]:
         if el not in program_list:
