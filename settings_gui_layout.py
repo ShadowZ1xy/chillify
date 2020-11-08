@@ -1,5 +1,6 @@
 import config
 
+
 def get_layout(sg, current_program_list, ignore_list,
                default_value_duration, default_value_periodicity):
     return [

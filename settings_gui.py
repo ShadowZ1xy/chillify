@@ -1,8 +1,9 @@
 import PySimpleGUI as sg
+
 import config
-import settings_gui_layout as gui_layout
 import os_tool
 import settings
+import settings_gui_layout as gui_layout
 
 if __name__ == "__main__":
     loaded_settings = settings.get_settings()
@@ -11,7 +12,7 @@ if __name__ == "__main__":
                                    program_list,
                                    loaded_settings[config.keyword_duration],
                                    loaded_settings[config.keyword_periodicity])
-    window = sg.Window('File Compare', layout)
+    window = sg.Window('Chillify settings', layout)
     while True:
         event, values = window.read()
         print(event, values)
