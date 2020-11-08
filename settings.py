@@ -1,4 +1,5 @@
 import json
+
 import config
 
 __settings_template = '{"%s": 20, "%s": 10, "%s": []}' % (
@@ -15,11 +16,11 @@ def __write_standard_json_values():
 
 
 def get_settings():
-    with open('settings.json', 'r') as settings_file:
-        try:
+    try:
+        with open('settings.json', 'r') as settings_file:
             settings = json.loads(settings_file.read())
-        except (json.decoder.JSONDecodeError, IOError):
-            settings = __write_standard_json_values()
+    except (json.decoder.JSONDecodeError, IOError, FileNotFoundError):
+        settings = __write_standard_json_values()
     return settings
 
 
