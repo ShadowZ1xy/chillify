@@ -14,21 +14,17 @@ def show_timer_window(timer,
     __window_to_center(root, w_size, h_size)
 
     timer_label = tk.Label(root)
-    timer_label.pack()
-    timer_label.config(font=timer_text_font_and_size, fg=timer_text_color)
-    timer_label.configure(bg=timer_text_bg_color)
-    timer_label.place(relx=0.5,
-                      rely=0.2,
-                      anchor='center')
+    __label_configure(timer_label,
+                      0.5, 0.2,
+                      timer_text_font_and_size,
+                      timer_text_color, timer_text_bg_color)
 
     text_label = tk.Label(root)
-    text_label.pack()
-    text_label["text"] = text
-    text_label.config(font=text_font_and_size, fg=text_color)
-    text_label.configure(bg=text_bg_color)
-    text_label.place(relx=0.5,
-                     rely=0.5,
-                     anchor='center')
+    __label_configure(text_label,
+                      0.5, 0.5,
+                      text_font_and_size,
+                      text_color, text_bg_color,
+                      text)
 
     __countdown(timer, timer_label, root)
     root.mainloop()
@@ -43,6 +39,20 @@ def __window_to_center(root, window_width, window_height):
 
     root.geometry("{}x{}+{}+{}".format(window_width, window_height,
                                        x_coordinate, y_coordinate))
+
+
+def __label_configure(label,
+                      x, y,
+                      font_and_size,
+                      text_color, bg_color,
+                      text=""):
+    label.pack()
+    label.config(font=font_and_size, fg=text_color)
+    label['text'] = text
+    label.configure(bg=bg_color)
+    label.place(relx=x,
+                rely=y,
+                anchor='center')
 
 
 def __countdown(count, label, root):
