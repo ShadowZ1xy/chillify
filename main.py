@@ -1,9 +1,10 @@
 from threading import Timer
+
 import win32api
-from time import sleep
 
 mbox = win32api.MessageBox(0, 'hello', 'title')
 mbox.close()
+
 
 def test():
     print("hello")

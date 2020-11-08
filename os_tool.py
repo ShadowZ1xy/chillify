@@ -1,4 +1,5 @@
 import subprocess
+
 cmd = 'powershell "gps | where {$_.MainWindowTitle } | select Name'
 proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 

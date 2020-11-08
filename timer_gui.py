@@ -1,22 +1,4 @@
-import PySimpleGUI as sg
 import tkinter as tk
-import gui_layout
-import os_tool
-
-if __name__ == "__main__":
-    ignore_list = []
-    layout = gui_layout.get_layout(sg, os_tool.get_program_list(), ignore_list)
-    window = sg.Window('File Compare', layout)
-    while True:
-        event, values = window.read()
-        print(event, values)
-        if event in (None, 'Отменить', 'Сохранить'):
-            break
-        elif event in ">":
-            for el in values["besides"]:
-                if el not in ignore_list:
-                    ignore_list.append(el)
-            window.Element('ignore').Update(values=ignore_list)
 
 
 def show_timer_window(timer,

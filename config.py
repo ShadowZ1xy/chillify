@@ -7,3 +7,7 @@ hint_text_color = "white"
 
 alert_window_width = 700
 alert_window_height = 500
+
+keyword_duration = "duration"
+keyword_periodicity = "periodicity"
+keyword_program_list = "program_list"
