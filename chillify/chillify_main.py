@@ -18,6 +18,7 @@ user_pause = False
 user_reset = False
 RESET_KEYWORD = "RESET"
 
+
 def tray_start():
     global user_pause
     app = QtWidgets.QApplication()
@@ -70,7 +71,6 @@ def __countdown(seconds):
         user_reset = False
         return RESET_KEYWORD
     if seconds > 0:
-        print(seconds)
         time.sleep(1)
         return __countdown(seconds - 1)
 
