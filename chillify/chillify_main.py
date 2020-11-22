@@ -15,7 +15,8 @@ duration = settings_vars[timer_config.keyword_duration]
 periodicity = settings_vars[timer_config.keyword_periodicity]
 pause_multimedia = settings_vars[timer_config.keyword_multimedia_pause]
 user_pause = False
-
+user_reset = False
+RESET_KEYWORD = "RESET"
 
 def tray_start():
     global user_pause
@@ -26,7 +27,7 @@ def tray_start():
     main_widget.setToolTip('Chillify')
     menu = QtWidgets.QMenu(None)
 
-    pause = menu.addAction("Не беспокоить")
+    pause = menu.addAction("Пауза")
     pause.triggered.connect(lambda: pause_toggle(pause))
     pause.setCheckable(True)
 
@@ -48,16 +49,30 @@ def tray_start():
 
 def timer_start():
     while True:
-        time.sleep(periodicity * 60)
-        if timer_continue() and not user_pause:
+        if __countdown(periodicity * 60) == RESET_KEYWORD:
+            continue
+        if timer_continue():
             if pause_multimedia:
                 os_tool.play_pause_multimedia()
             gui.show_timer_window(duration, hint.get_random_hint())
             if pause_multimedia:
                 os_tool.play_pause_multimedia()
         else:
-            while not timer_continue() or user_pause:
+            while not timer_continue():
                 time.sleep(5)
+
+
+def __countdown(seconds):
+    global user_reset
+    while user_pause:
+        time.sleep(1)
+    if user_reset:
+        user_reset = False
+        return RESET_KEYWORD
+    if seconds > 0:
+        print(seconds)
+        time.sleep(1)
+        return __countdown(seconds - 1)
 
 
 def timer_continue():
@@ -77,11 +92,13 @@ def pause_toggle(pause):
 
 
 def update_settings():
-    global settings_vars, duration, periodicity, pause_multimedia
+    global settings_vars, duration, periodicity, pause_multimedia, user_reset
     settings_vars = timer_settings.get_settings()
     duration = settings_vars[timer_config.keyword_duration]
-    periodicity = settings_vars[timer_config.keyword_periodicity]
     pause_multimedia = settings_vars[timer_config.keyword_multimedia_pause]
+    if periodicity != settings_vars[timer_config.keyword_periodicity]:
+        user_reset = True
+        periodicity = settings_vars[timer_config.keyword_periodicity]
 
 
 if __name__ == '__main__':
