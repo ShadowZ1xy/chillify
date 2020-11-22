@@ -16,8 +16,10 @@ def get_program_list():
     program_list = [x for x in program_list if not __ignore_word(x)]
     return program_list
 
+
 def play_pause_multimedia():
     SendInput(Keyboard(VK_MEDIA_PLAY_PAUSE))
+
 
 def __ignore_word(string):
     for el in ignore_list:
@@ -72,8 +74,6 @@ def SendInput(*inputs):
     pInputs = LPINPUT(*inputs)
     cbSize = ctypes.c_int(ctypes.sizeof(INPUT))
     return ctypes.windll.user32.SendInput(nInputs, pInputs, cbSize)
-
-
 
 
 INPUT_MOUSE = 0

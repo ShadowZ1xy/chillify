@@ -9,9 +9,10 @@ __settings_template = '{"%s": 20, "%s": 10, "%s": [], "%s": true}' % (
     config.keyword_multimedia_pause
 )
 
+
 def get_settings():
     try:
-        with open(config.path_to_json+'settings.json', 'r') as settings_file:
+        with open(config.path_to_json + 'settings.json', 'r') as settings_file:
             settings = json.loads(settings_file.read())
     except (json.decoder.JSONDecodeError, IOError, FileNotFoundError):
         settings = __write_standard_json_values()
@@ -19,7 +20,7 @@ def get_settings():
 
 
 def set_settings(settings):
-    with open(config.path_to_json+'settings.json', 'w') as settings_file:
+    with open(config.path_to_json + 'settings.json', 'w') as settings_file:
         settings_file.write(json.dumps(settings))
 
 
@@ -34,9 +35,8 @@ def get_settings_from_gui_then_save(setup):
                     config.keyword_multimedia_pause: setup[config.keyword_multimedia_pause].get()}
     set_settings(settings_obj)
 
+
 def __write_standard_json_values():
-    with open(config.path_to_json+'settings.json', 'w') as settings_file:
+    with open(config.path_to_json + 'settings.json', 'w') as settings_file:
         settings_file.write(__settings_template)
     return json.loads(__settings_template)
-
-

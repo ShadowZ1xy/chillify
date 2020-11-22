@@ -1,8 +1,8 @@
+import codecs
 import json
 import os
 import random
 import sys
-import codecs
 
 path = os.path.dirname(sys.argv[0]) + "\\"
 
