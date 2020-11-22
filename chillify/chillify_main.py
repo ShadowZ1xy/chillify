@@ -4,11 +4,11 @@ import time
 
 from PySide2 import QtWidgets, QtGui
 
-from chillify import hint
-from chillify import os_tool
-from chillify import timer_config
-from chillify import timer_gui as gui
-from chillify import timer_settings
+import hint
+import os_tool
+import timer_config
+import timer_gui as gui
+import timer_settings
 
 settings_vars = timer_settings.get_settings()
 duration = settings_vars[timer_config.keyword_duration]

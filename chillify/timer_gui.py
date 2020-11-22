@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from chillify.timer_config import *
+from timer_config import *
 
 
 def show_timer_window(timer, text):

@@ -1,6 +1,6 @@
 import json
 
-from settings import settings_config as config
+import settings_config as config
 
 __settings_template = '{"%s": 20, "%s": 10, "%s": [], "%s": true}' % (
     config.keyword_duration,

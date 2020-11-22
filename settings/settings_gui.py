@@ -1,8 +1,8 @@
 import tkinter as tk
 
-from settings import settings_config as config
-from settings import settings_db
-from settings import settings_service as service
+import settings_config as config
+import settings_db
+import settings_service as service
 
 
 def settings_window_setup():

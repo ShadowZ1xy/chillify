@@ -1,8 +1,8 @@
 import tkinter as tk
 
-from settings import os_tool
-from settings import settings_config as config
-from settings import settings_db
+import os_tool
+import settings_config as config
+import settings_db
 
 
 def gui_elements_setup(root, duration, periodicity, multimedia_boolean):

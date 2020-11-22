@@ -1,6 +1,6 @@
 import json
 
-from chillify import timer_config
+import timer_config
 
 __settings_template = '{"%s": 20, "%s": 10, "%s": [], "%s": true}' % (
     timer_config.keyword_duration,
