@@ -33,10 +33,11 @@ def __ignore_word(string):
 def __check_audio_status():
     try:
         p = subprocess.Popen([
-            "START",
-            "/B",
-            audio_command
-        ], shell=True, stdout=subprocess.PIPE)
+            'start',
+            '/B',
+            '/WAIT ""',
+            audio_command],
+            shell=True, stdout=subprocess.PIPE)
     except FileNotFoundError:
         return None
     arr = []

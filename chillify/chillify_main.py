@@ -38,6 +38,11 @@ def tray_start():
 
     menu.addSeparator()
 
+    media_pause = menu.addAction("Остановить медиа во время отдыха")
+    media_pause.triggered.connect(lambda: media_pause_toggle(media_pause))
+    media_pause.setCheckable(True)
+    media_pause.setChecked(pause_multimedia)
+
     exit_ = menu.addAction("Выход")
     exit_.triggered.connect(lambda: sys.exit())
 
@@ -121,6 +126,12 @@ def pause_toggle(pause):
     global user_pause
     user_pause = not user_pause
     pause.setChecked(user_pause)
+
+
+def media_pause_toggle(media):
+    global pause_multimedia
+    pause_multimedia = not pause_multimedia
+    media.setChecked(pause_multimedia)
 
 
 def update_settings():

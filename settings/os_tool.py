@@ -12,6 +12,7 @@ def get_program_list():
             program_list.append(line.decode().rstrip())
     proc.terminate()
     del program_list[:2]
+    program_list = set(program_list)
     program_list = [x for x in program_list if not __ignore_word(x)]
     return program_list
 
