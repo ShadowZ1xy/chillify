@@ -31,14 +31,19 @@ def __ignore_word(string):
 
 
 def __check_audio_status():
-    p = subprocess.Popen([audio_command],
-                         stdout=subprocess.PIPE,
-                         stderr=subprocess.PIPE)
-    stdout, _ = p.communicate()
-    if p.returncode == 0:
-        return stdout.decode('cp1252')
-    else:
+    try:
+        p = subprocess.Popen([
+            "START",
+            "/B",
+            audio_command
+        ], shell=True, stdout=subprocess.PIPE)
+    except FileNotFoundError:
         return None
+    arr = []
+    for line in p.stdout:
+        if line.rstrip():
+            arr.append(line.decode('utf-8'))
+    return arr[0]
 
 
 def is_audio_playing():
