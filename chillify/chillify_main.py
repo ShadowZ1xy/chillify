@@ -14,6 +14,7 @@ settings_vars = timer_settings.get_settings()
 duration = settings_vars[timer_config.keyword_duration]
 periodicity = settings_vars[timer_config.keyword_periodicity]
 pause_multimedia = settings_vars[timer_config.keyword_multimedia_pause]
+anyway_pause = None
 user_pause = False
 user_reset = False
 paused = False
@@ -21,7 +22,6 @@ RESET_KEYWORD = "RESET"
 
 
 def tray_start():
-    global user_pause
     app = QtWidgets.QApplication()
     icon = QtGui.QIcon("icon.ico")
 
@@ -42,29 +42,57 @@ def tray_start():
     exit_.triggered.connect(lambda: sys.exit())
 
     main_widget.setContextMenu(menu)
-
+    if pause_multimedia and os_tool.is_audio_playing() is None:
+        warning_audio_driver()
     main_widget.setVisible(True)
-    main_widget.show()
     main_widget.show()
     sys.exit(app.exec_())
 
 
 def timer_start():
-    global paused
     while True:
         if __countdown(periodicity * 60) == RESET_KEYWORD:
             continue
         if timer_continue():
-            if pause_multimedia and os_tool.is_audio_playing():
-                os_tool.play_pause_multimedia()
-                paused = True
-            gui.show_timer_window(duration, hint.get_random_hint())
-            if pause_multimedia and paused and not os_tool.is_audio_playing():
-                os_tool.play_pause_multimedia()
-                paused = False
+            timer_proc()
         else:
             while not timer_continue():
                 time.sleep(5)
+
+
+def warning_audio_driver():
+    global anyway_pause
+    message = "В вашей системе не корректно работает аудио драйвер." \
+              "\nИз за этого функция определения проигрывание аудио/видео не будет работать." \
+              "\nХотите оставить функцию остановки воспроизведение во время отдыха включенным?" \
+              "\n(если у вас будет аудио на паузе то во время отдыха оно будет включатся а в конце отключатся)"
+    box = QtWidgets.QMessageBox()
+    box.setWindowIcon(QtGui.QIcon("icon.ico"))
+    box.setIcon(QtWidgets.QMessageBox.Warning)
+    box.setWindowTitle('Предупреждение!')
+    box.setText(message)
+    box.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+    buttonY = box.button(QtWidgets.QMessageBox.Yes)
+    buttonY.setText('Да')
+    buttonN = box.button(QtWidgets.QMessageBox.No)
+    buttonN.setText('Нет')
+    box.exec_()
+
+    if box.clickedButton() == buttonY:
+        anyway_pause = True
+    elif box.clickedButton() == buttonN:
+        anyway_pause = False
+
+
+def timer_proc():
+    global paused
+    if (pause_multimedia and os_tool.is_audio_playing() is True) or (anyway_pause is True):
+        os_tool.play_pause_multimedia()
+        paused = True
+    gui.show_timer_window(duration, hint.get_random_hint())
+    if (pause_multimedia and paused and os_tool.is_audio_playing() is False) or (anyway_pause is True):
+        os_tool.play_pause_multimedia()
+    paused = False
 
 
 def __countdown(seconds):
