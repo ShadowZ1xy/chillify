@@ -16,6 +16,7 @@ periodicity = settings_vars[timer_config.keyword_periodicity]
 pause_multimedia = settings_vars[timer_config.keyword_multimedia_pause]
 user_pause = False
 user_reset = False
+paused = False
 RESET_KEYWORD = "RESET"
 
 
@@ -49,15 +50,18 @@ def tray_start():
 
 
 def timer_start():
+    global paused
     while True:
         if __countdown(periodicity * 60) == RESET_KEYWORD:
             continue
         if timer_continue():
-            if pause_multimedia:
+            if pause_multimedia and os_tool.is_audio_playing():
                 os_tool.play_pause_multimedia()
+                paused = True
             gui.show_timer_window(duration, hint.get_random_hint())
-            if pause_multimedia:
+            if pause_multimedia and paused and not os_tool.is_audio_playing():
                 os_tool.play_pause_multimedia()
+                paused = False
         else:
             while not timer_continue():
                 time.sleep(5)

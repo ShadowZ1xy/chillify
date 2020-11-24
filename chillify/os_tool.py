@@ -1,6 +1,8 @@
 import ctypes
 import subprocess
 
+from timer_config import relative_path_to_csharp_audio_checker as audio_command
+
 cmd = 'powershell "gps | where {$_.MainWindowTitle } | select Name"'
 ignore_list = ["Windows", "python", "settings"]
 
@@ -26,6 +28,33 @@ def __ignore_word(string):
         if el in string:
             return True
     return False
+
+
+def __check_audio_status():
+    p = subprocess.Popen([audio_command],
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+    stdout, _ = p.communicate()
+    if p.returncode == 0:
+        return stdout.decode('cp1252')
+    else:
+        return None
+
+
+def is_audio_playing():
+    status = __check_audio_status()
+    if status is not None:
+        status = status.replace(',', '.')
+        try:
+            value = float(status)
+        except ValueError:
+            value = None
+        if value == None:
+            return None
+        if value == 0.0 or value == 1.4e-09:
+            return False
+        else:
+            return True
 
 
 LONG = ctypes.c_long

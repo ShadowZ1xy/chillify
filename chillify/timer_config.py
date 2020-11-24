@@ -16,3 +16,4 @@ keyword_periodicity = "periodicity"
 keyword_program_list = "program_list"
 path_to_json = os.path.dirname(os.path.dirname(sys.argv[0])) + "\\"
 keyword_multimedia_pause = "multimedia_pause"
+relative_path_to_csharp_audio_checker = 'csharp_audio\\CheckAudioStatus.exe'
