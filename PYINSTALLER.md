@@ -1,4 +1,4 @@
-# PyInstaller commands
+# PyInstaller команды
 
 
 ### Chillify
@@ -8,6 +8,7 @@ $ pyinstaller --noconfirm --onedir --windowed
     --name "chillify"
     --add-data "path/to/chillify/hints.json;."
     --add-data "path/to/chillify/icon.ico;." 
+    --add-data "path/to/csharp_audio;csharp_audio/"
     "path/to/chillify/chillify_main.py"
 ```
 
