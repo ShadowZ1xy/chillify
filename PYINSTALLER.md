@@ -1,4 +1,4 @@
-# PyInstaller команды
+# PyInstaller commands
 
 
 ### Chillify
