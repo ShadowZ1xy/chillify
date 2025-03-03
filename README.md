@@ -2,30 +2,28 @@
 
 # Chillify
 
-### Описание
-Chillify - это программа, которая поможет вам заботиться о своем здоровье.
+### Description
+Chillify is a program designed to help you take care of your health.
 
-Она будет напоминать вам, когда пора сделать перерыв при работе с компьютером.  В программе можно настраивать периодичность и длительность перерывов, так же можно добавить программы/игры во время которых она не будет отвлекать вас. 
+It will remind you when it's time to take a break while working on your computer. You can customize the frequency and duration of breaks, as well as add programs/games during which it will not disturb you.
 
-Так же имеется функция остановки видео/аудио во время перерыва для более удобного просмотра фильмов или прослушивание музыки.
+Additionally, there is a feature to pause video/audio playback during breaks for a more convenient movie-watching or music-listening experience.
 
-### Скачивание
-https://github.com/ShadowZ1xy/chillify/releases/tag/v1.2
+### Download
+[https://github.com/ShadowZ1xy/chillify/releases/tag/v1.2](https://github.com/ShadowZ1xy/chillify/releases/tag/v1.2)
 
+### Technologies Used
+- Python  
+- Tkinter  
+- PySide2  
+- PyInstaller  
+- C#  
+- Windows Core Audio API (CSCore)  
 
+### Compiling from Source
+To compile the program into a .exe file, check the [documentation](PYINSTALLER.md).  
 
-### Используемые технологии
-- Python
-- Tkinter
-- PySide2
-- PyInstaller
-- C#
-- Windows Core Audio API (CSCore)
-
-### Компиляция из исходников
-Для компиляции программы в .exe посмотрите [документацию](PYINSTALLER.md)
-
-### Минимальные требования
-- Windows (8, 8.1, 10)
-- .NET Framework 3.5+
-- Наличие свободного дискового пространства не менее 60 МБ.
+### Minimum Requirements
+- Windows (8, 8.1, 10)  
+- .NET Framework 3.5+  
+- At least 60 MB of free disk space
